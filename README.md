@@ -2,30 +2,64 @@
 
 This repository contains squashed Docker images for the Onyx application along with necessary configuration files. These images have been exported from a working Onyx deployment and squashed into single-layer images for improved portability and efficiency.
 
-## Docker Image Files
+## Repository Contents
 
-The following Docker image files are included in this repository:
+The repository includes everything needed to run Onyx:
 
-- `onyx-backend-squashed.tar.gz` - The Onyx backend service (616MB)
-- `onyx-model-server-squashed.tar.gz` - The ML model server for Onyx (1.4GB)
-- `onyx-web-server-squashed.tar.gz` - The web server for Onyx (91MB)
-- `vespa-squashed.tar.gz` - The Vespa search engine (524MB)
-- `postgres-squashed.tar.gz` - PostgreSQL database (84MB)
-- `redis-squashed.tar.gz` - Redis cache (16MB)
-- `nginx-squashed.tar.gz` - Nginx web server (15MB)
+- **Docker Image Files**:
+  - `onyx-backend-squashed.tar.gz` - The Onyx backend service (616MB)
+  - `onyx-model-server-squashed.tar.gz` - The ML model server for Onyx (1.4GB)
+  - `onyx-web-server-squashed.tar.gz` - The web server for Onyx (91MB)
+  - `vespa-squashed.tar.gz` - The Vespa search engine (524MB)
+  - `postgres-squashed.tar.gz` - PostgreSQL database (84MB)
+  - `redis-squashed.tar.gz` - Redis cache (16MB)
+  - `nginx-squashed.tar.gz` - Nginx web server (15MB)
+- **Configuration**:
+  - `.env` - Environment configuration for Onyx
+- **Scripts**:
+  - `import-images.sh` - Script to import all Docker images
 
-Place these files in the same directory as the `import-images.sh` script before proceeding.
+## Instructions for Your Manager
 
-## Importing Images
+To use this repository:
 
-To import all Docker images, run the included `import-images.sh` script:
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/NamanSudan/onyx-squashed.git
+   cd onyx-squashed
+   ```
 
-```bash
-chmod +x import-images.sh
-./import-images.sh
-```
+2. Import all Docker images using the provided script:
+   ```bash
+   chmod +x import-images.sh
+   ./import-images.sh
+   ```
 
-Or import them individually:
+3. Clone the Onyx repository:
+   ```bash
+   git clone https://github.com/onyx-dot-app/onyx.git
+   ```
+
+4. Copy the `.env` file to the Onyx root directory:
+   ```bash
+   cp .env onyx/
+   ```
+
+5. Navigate to the Docker Compose directory:
+   ```bash
+   cd onyx/deployment/docker_compose
+   ```
+
+6. Start Onyx using Docker Compose:
+   ```bash
+   docker compose -f docker-compose.dev.yml -p onyx-stack up -d
+   ```
+
+7. Onyx will be accessible at http://localhost:3003
+
+## Alternative: Manual Import
+
+If you prefer to import the images manually:
 
 ```bash
 # Import and tag the backend image
@@ -43,27 +77,6 @@ cat postgres-squashed.tar.gz | docker import - postgres:15.2-alpine
 cat redis-squashed.tar.gz | docker import - redis:7.4-alpine
 cat nginx-squashed.tar.gz | docker import - nginx:1.23.4-alpine
 ```
-
-## Running Onyx
-
-1. Clone the Onyx repository:
-   ```bash
-   git clone https://github.com/onyx-dot-app/onyx.git
-   ```
-
-2. Copy the `.env` file to the Onyx root directory (this should be provided separately for security reasons)
-
-3. Navigate to the Docker Compose directory:
-   ```bash
-   cd onyx/deployment/docker_compose
-   ```
-
-4. Start Onyx using Docker Compose:
-   ```bash
-   docker compose -f docker-compose.dev.yml -p onyx-stack up -d
-   ```
-
-5. Onyx will be accessible at http://localhost:3003
 
 ## Important Note
 
