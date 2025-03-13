@@ -1,8 +1,10 @@
 # Onyx Docker Images (Squashed)
 
-This repository contains pre-built, squashed Docker images for the Onyx application. These images have been exported from a working Onyx deployment and squashed into single-layer images for improved portability and efficiency.
+This repository contains squashed Docker images for the Onyx application along with necessary configuration files. These images have been exported from a working Onyx deployment and squashed into single-layer images for improved portability and efficiency.
 
-## Image Files
+## Docker Image Files
+
+The following Docker image files are included in this repository:
 
 - `onyx-backend-squashed.tar.gz` - The Onyx backend service (616MB)
 - `onyx-model-server-squashed.tar.gz` - The ML model server for Onyx (1.4GB)
@@ -11,6 +13,8 @@ This repository contains pre-built, squashed Docker images for the Onyx applicat
 - `postgres-squashed.tar.gz` - PostgreSQL database (84MB)
 - `redis-squashed.tar.gz` - Redis cache (16MB)
 - `nginx-squashed.tar.gz` - Nginx web server (15MB)
+
+Place these files in the same directory as the `import-images.sh` script before proceeding.
 
 ## Importing Images
 
