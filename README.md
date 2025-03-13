@@ -19,7 +19,7 @@ The repository includes everything needed to run Onyx:
 - **Scripts**:
   - `import-images.sh` - Script to import all Docker images
 
-## Instructions for Your Manager
+## Instructions
 
 To use this repository:
 
